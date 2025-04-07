@@ -48,7 +48,10 @@ function renderDailyObjectives() {
   
   dailyObjectives.forEach(objective => {
     html += `<li>
-      <h3>${objective.name} <button onclick="editObjective('${objective.id}')">Editar</button> <button onclick="deleteObjective('${objective.id}')">Eliminar</button></h3>
+      <h3>${objective.name} 
+        <button onclick="editObjective('${objective.id}')">Editar</button> 
+        <button onclick="deleteObjective('${objective.id}')">Eliminar</button>
+      </h3>
       <div>Progreso: ${getProgress(objective)}%</div>
       <ul>`;
     
