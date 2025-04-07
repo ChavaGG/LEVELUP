@@ -1,6 +1,5 @@
 const objetivosDiarios = [];
 const objetivosSemanales = [];
-const tareas = {};
 
 function mostrarFormulario(tipo) {
     const formulario = document.getElementById('formulario-objetivo');
@@ -47,3 +46,4 @@ function renderizarObjetivosSemanales() {
         lista.appendChild(objetivoElement);
     });
 }
+
