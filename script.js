@@ -1,103 +1,49 @@
-// --- VARIABLES Y ELEMENTOS ---
-const objetivos = JSON.parse(localStorage.getItem('objetivos')) || [];
+const objetivosDiarios = [];
+const objetivosSemanales = [];
+const tareas = {};
 
-const resumenTab = document.getElementById("resumen");
-const diariosTab = document.getElementById("diarios");
-const semanalesTab = document.getElementById("semanales");
-const editarTab = document.getElementById("editar");
+function mostrarFormulario(tipo) {
+    const formulario = document.getElementById('formulario-objetivo');
+    const titulo = document.getElementById('formulario-titulo');
+    titulo.textContent = tipo.charAt(0).toUpperCase() + tipo.slice(1) + " Objetivo";
 
-const diaSemanaSelect = document.getElementById("dia-semana");
-const nuevoObjetivoInput = document.getElementById("nuevo-objetivo");
-const tipoObjetivoSelect = document.getElementById("tipo-objetivo");
-const agregarObjetivoBtn = document.getElementById("agregar-objetivo");
+    document.getElementById('form-objetivo').onsubmit = function(event) {
+        event.preventDefault();
+        const nombre = document.getElementById('nombre').value;
+        const tipoObjetivo = document.getElementById('tipo').value;
 
-const templateObjetivo = document.createElement("template");
-templateObjetivo.innerHTML = `
-    <div class="objetivo">
-        <h3 class="objetivo-nombre"></h3>
-        <div class="tareas">
-            <input type="text" class="nueva-tarea" placeholder="Nueva tarea">
-            <button class="agregar-tarea">Agregar Tarea</button>
-        </div>
-        <div class="tareas-list"></div>
-        <button class="eliminar-objetivo">Eliminar Objetivo</button>
-    </div>
-`;
+        if (tipoObjetivo === "diario") {
+            objetivosDiarios.push({ nombre, tipo: "diario", tareas: [] });
+            renderizarObjetivosDiarios();
+        } else if (tipoObjetivo === "semanal") {
+            objetivosSemanales.push({ nombre, tipo: "semanal", tareas: [] });
+            renderizarObjetivosSemanales();
+        }
 
-// --- FUNCIONES DE PESTAÑAS ---
-document.querySelectorAll('.tab-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
-    btn.classList.add('active');
-    document.getElementById(btn.dataset.tab).classList.remove('hidden');
-    renderizar();
-  });
-});
-document.querySelector('[data-tab="resumen"]').click();
+        formulario.style.display = 'none';
+    }
 
-function guardar() {
-  localStorage.setItem('objetivos', JSON.stringify(objetivos));
+    formulario.style.display = 'block';
 }
 
-function renderizar() {
-  renderResumen();
-  renderDiarios();
-  renderSemanales();
-  renderEditar();
-}
-
-function renderResumen() {
-  resumenTab.innerHTML = '';
-  objetivos.forEach(obj => {
-    const clon = templateObjetivo.content.cloneNode(true);
-    clon.querySelector(".objetivo-nombre").textContent = obj.nombre;
-    resumenTab.appendChild(clon);
-  });
-}
-
-function renderDiarios() {
-  diariosTab.innerHTML = '';
-  const dia = diaSemanaSelect.value;
-  objetivos
-    .filter(o => o.tipo === 'diario' && o.dia === dia)
-    .forEach(obj => {
-      const clon = templateObjetivo.content.cloneNode(true);
-      clon.querySelector(".objetivo-nombre").textContent = obj.nombre;
-      diariosTab.appendChild(clon);
+function renderizarObjetivosDiarios() {
+    const lista = document.getElementById('lista-diarios');
+    lista.innerHTML = '';
+    objetivosDiarios.forEach((obj, index) => {
+        const objetivoElement = document.createElement('div');
+        objetivoElement.textContent = obj.nombre;
+        lista.appendChild(objetivoElement);
     });
 }
 
-function renderSemanales() {
-  semanalesTab.innerHTML = '';
-  objetivos
-    .filter(o => o.tipo === 'semanal')
-    .forEach(obj => {
-      const clon = templateObjetivo.content.cloneNode(true);
-      clon.querySelector(".objetivo-nombre").textContent = obj.nombre;
-      semanalesTab.appendChild(clon);
+function renderizarObjetivosSemanales() {
+    const lista = document.getElementById('lista-semanales');
+    lista.innerHTML = '';
+    objetivosSemanales.forEach((obj, index) => {
+        const objetivoElement = document.createElement('div');
+        objetivoElement.textContent = obj.nombre;
+        lista.appendChild(objetivoElement);
     });
 }
 
-function renderEditar() {
-  editarTab.innerHTML = '';
-  objetivos.forEach(obj => {
-    const clon = templateObjetivo.content.cloneNode(true);
-    clon.querySelector(".objetivo-nombre").textContent = obj.nombre;
-    editarTab.appendChild(clon);
-  });
-}
-
-agregarObjetivoBtn.onclick = () => {
-  const nombre = nuevoObjetivoInput.value.trim();
-  const tipo = tipoObjetivoSelect.value;
-  if (!nombre) return alert("Debes escribir un nombre.");
-  const nuevo = { nombre, tipo, tareas: [] };
-  if (tipo === "diario") nuevo.dia = diaSemanaSelect.value;
-  objetivos.push(nuevo);
-  nuevoObjetivoInput.value = '';
-  tipoObjetivoSelect.value = 'diario';
-  guardar();
-  renderizar();
-};
 
