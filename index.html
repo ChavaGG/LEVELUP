@@ -3,59 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productividad Gamificada</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Aplicación de Productividad Gamificada</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <!-- Pestañas -->
-        <div class="tabs">
-            <button class="tab-btn" data-tab="resumen">Resumen</button>
-            <button class="tab-btn" data-tab="diarios">Objetivos Diarios</button>
-            <button class="tab-btn" data-tab="semanales">Objetivos Semanales</button>
-            <button class="tab-btn" data-tab="editar">Editar Objetivos</button>
-        </div>
+        <header>
+            <h1>Aplicación de Productividad Gamificada</h1>
+            <nav>
+                <ul>
+                    <li><a href="#objetivos-diarios">Objetivos Diarios</a></li>
+                    <li><a href="#objetivos-semanales">Objetivos Semanales</a></li>
+                    <li><a href="#resumen">Resumen</a></li>
+                    <li><a href="#editar">Editar Objetivos</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <main>
+            <section id="objetivos-diarios" class="tab">
+                <h2>Objetivos Diarios</h2>
+                <div class="objetivos-lista" id="lista-diarios"></div>
+                <button onclick="mostrarFormulario('diario')">Agregar Objetivo Diario</button>
+            </section>
 
-        <!-- Contenido de las pestañas -->
-        <div id="resumen" class="tab-content">
-            <h2>Resumen de Objetivos</h2>
-            <div id="resumen-objetivos"></div>
-        </div>
+            <section id="objetivos-semanales" class="tab">
+                <h2>Objetivos Semanales</h2>
+                <div class="objetivos-lista" id="lista-semanales"></div>
+                <button onclick="mostrarFormulario('semanal')">Agregar Objetivo Semanal</button>
+            </section>
 
-        <div id="diarios" class="tab-content">
-            <h2>Objetivos Diarios</h2>
-            <label for="dia-semana">Día de la semana:</label>
-            <select id="dia-semana">
-                <option value="lunes">Lunes</option>
-                <option value="martes">Martes</option>
-                <option value="miercoles">Miércoles</option>
-                <option value="jueves">Jueves</option>
-                <option value="viernes">Viernes</option>
-                <option value="sabado">Sábado</option>
-                <option value="domingo">Domingo</option>
-            </select>
-            <div id="diarios-objetivos"></div>
-        </div>
+            <section id="resumen" class="tab">
+                <h2>Resumen</h2>
+                <div id="resumen-contenido"></div>
+            </section>
 
-        <div id="semanales" class="tab-content">
-            <h2>Objetivos Semanales</h2>
-            <div id="semanales-objetivos"></div>
-        </div>
+            <section id="editar" class="tab">
+                <h2>Editar Objetivos</h2>
+                <div id="editar-contenido"></div>
+            </section>
+        </main>
 
-        <div id="editar" class="tab-content">
-            <h2>Editar Objetivos</h2>
-            <input type="text" id="nuevo-objetivo" placeholder="Nuevo objetivo">
-            <select id="tipo-objetivo">
-                <option value="diario">Diario</option>
-                <option value="semanal">Semanal</option>
-                <option value="unico">Único</option>
-            </select>
-            <button id="agregar-objetivo">Agregar Objetivo</button>
-            <div id="editar-objetivos"></div>
-        </div>
+        <footer>
+            <p>Aplicación de Productividad Gamificada - 2025</p>
+        </footer>
     </div>
 
-    <script src="script.js"></script>
+    <div id="formulario-objetivo" class="formulario">
+        <h3 id="formulario-titulo"></h3>
+        <form id="form-objetivo">
+            <label for="nombre">Nombre del Objetivo:</label>
+            <input type="text" id="nombre" required>
+
+            <label for="tipo">Tipo de Objetivo:</label>
+            <select id="tipo">
+                <option value="diario">Diario</option>
+                <option value="semanal">Semanal</option>
+                <option value="único">Único</option>
+            </select>
+
+            <button type="submit">Guardar Objetivo</button>
+        </form>
+    </div>
+
+    <script src="app.js"></script>
 </body>
 </html>
-
