@@ -31,6 +31,7 @@ function renderizarObjetivosDiarios() {
     lista.innerHTML = '';
     objetivosDiarios.forEach((obj, index) => {
         const objetivoElement = document.createElement('div');
+        objetivoElement.classList.add('objetivo-item');
         objetivoElement.textContent = obj.nombre;
         lista.appendChild(objetivoElement);
     });
@@ -41,9 +42,8 @@ function renderizarObjetivosSemanales() {
     lista.innerHTML = '';
     objetivosSemanales.forEach((obj, index) => {
         const objetivoElement = document.createElement('div');
+        objetivoElement.classList.add('objetivo-item');
         objetivoElement.textContent = obj.nombre;
         lista.appendChild(objetivoElement);
     });
 }
-
-
