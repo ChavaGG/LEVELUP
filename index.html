@@ -1,74 +1,31 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aplicación de Productividad Gamificada</title>
-    <!-- Importando la fuente de Google Fonts para un estilo retro -->
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Productivity App</title>
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Aplicación de Productividad Gamificada</h1>
-            <nav>
-                <ul>
-                    <li><a href="#objetivos-diarios">Objetivos Diarios</a></li>
-                    <li><a href="#objetivos-semanales">Objetivos Semanales</a></li>
-                    <li><a href="#resumen">Resumen</a></li>
-                    <li><a href="#editar">Editar Objetivos</a></li>
-                </ul>
-            </nav>
-        </header>
+  <div id="app">
+    <header>
+      <h1>Productivity App</h1>
+      <nav>
+        <ul>
+          <li><a href="#" onclick="showTab('daily')">Objetivos Diarios</a></li>
+          <li><a href="#" onclick="showTab('weekly')">Objetivos Semanales</a></li>
+          <li><a href="#" onclick="showTab('history')">Objetivos Pasados</a></li>
+          <li><a href="#" onclick="showTab('summary')">Resumen</a></li>
+          <li><a href="#" onclick="showTab('manage')">Gestionar Objetivos</a></li>
+        </ul>
+      </nav>
+    </header>
 
-        <main>
-            <section id="objetivos-diarios" class="tab">
-                <h2>Objetivos Diarios</h2>
-                <div class="objetivos-lista" id="lista-diarios"></div>
-                <button onclick="mostrarFormulario('diario')">Agregar Objetivo Diario</button>
-            </section>
+    <main id="content">
+      <!-- Aquí se cargarán las vistas dinámicas -->
+    </main>
+  </div>
 
-            <section id="objetivos-semanales" class="tab">
-                <h2>Objetivos Semanales</h2>
-                <div class="objetivos-lista" id="lista-semanales"></div>
-                <button onclick="mostrarFormulario('semanal')">Agregar Objetivo Semanal</button>
-            </section>
-
-            <section id="resumen" class="tab">
-                <h2>Resumen</h2>
-                <div id="resumen-contenido"></div>
-            </section>
-
-            <section id="editar" class="tab">
-                <h2>Editar Objetivos</h2>
-                <div id="editar-contenido"></div>
-            </section>
-        </main>
-
-        <footer>
-            <p>Aplicación de Productividad Gamificada - 2025</p>
-        </footer>
-    </div>
-
-    <!-- Formulario emergente para agregar objetivos -->
-    <div id="formulario-objetivo" class="formulario">
-        <h3 id="formulario-titulo"></h3>
-        <form id="form-objetivo">
-            <label for="nombre">Nombre del Objetivo:</label>
-            <input type="text" id="nombre" required>
-
-            <label for="tipo">Tipo de Objetivo:</label>
-            <select id="tipo">
-                <option value="diario">Diario</option>
-                <option value="semanal">Semanal</option>
-                <option value="único">Único</option>
-            </select>
-
-            <button type="submit">Guardar Objetivo</button>
-        </form>
-    </div>
-
-    <script src="app.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
