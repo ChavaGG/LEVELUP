@@ -1,89 +1,61 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>App de Productividad Gamificada</title>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productividad Gamificada</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>Productividad Gamificada</h1>
-    </header>
+    <div class="container">
+        <!-- Pestañas -->
+        <div class="tabs">
+            <button class="tab-btn" data-tab="resumen">Resumen</button>
+            <button class="tab-btn" data-tab="diarios">Objetivos Diarios</button>
+            <button class="tab-btn" data-tab="semanales">Objetivos Semanales</button>
+            <button class="tab-btn" data-tab="editar">Editar Objetivos</button>
+        </div>
 
-    <!-- Pestañas para las diferentes secciones -->
-    <div class="tabs">
-      <button class="tab-btn active" data-tab="resumen">Resumen</button>
-      <button class="tab-btn" data-tab="diarios">Objetivos Diarios</button>
-      <button class="tab-btn" data-tab="semanales">Objetivos Semanales</button>
-      <button class="tab-btn" data-tab="unicos">Objetivos Únicos</button>
-      <button class="tab-btn" data-tab="editar">Editar Objetivos</button>
+        <!-- Contenido de las pestañas -->
+        <div id="resumen" class="tab-content">
+            <h2>Resumen de Objetivos</h2>
+            <div id="resumen-objetivos"></div>
+        </div>
+
+        <div id="diarios" class="tab-content">
+            <h2>Objetivos Diarios</h2>
+            <label for="dia-semana">Día de la semana:</label>
+            <select id="dia-semana">
+                <option value="lunes">Lunes</option>
+                <option value="martes">Martes</option>
+                <option value="miercoles">Miércoles</option>
+                <option value="jueves">Jueves</option>
+                <option value="viernes">Viernes</option>
+                <option value="sabado">Sábado</option>
+                <option value="domingo">Domingo</option>
+            </select>
+            <div id="diarios-objetivos"></div>
+        </div>
+
+        <div id="semanales" class="tab-content">
+            <h2>Objetivos Semanales</h2>
+            <div id="semanales-objetivos"></div>
+        </div>
+
+        <div id="editar" class="tab-content">
+            <h2>Editar Objetivos</h2>
+            <input type="text" id="nuevo-objetivo" placeholder="Nuevo objetivo">
+            <select id="tipo-objetivo">
+                <option value="diario">Diario</option>
+                <option value="semanal">Semanal</option>
+                <option value="unico">Único</option>
+            </select>
+            <button id="agregar-objetivo">Agregar Objetivo</button>
+            <div id="editar-objetivos"></div>
+        </div>
     </div>
 
-    <!-- Contenido de las pestañas -->
-    <div id="resumen" class="tab-content active">
-      <!-- Resumen de progreso aquí -->
-    </div>
-    <div id="diarios" class="tab-content">
-      <!-- Objetivos diarios aquí -->
-    </div>
-    <div id="semanales" class="tab-content">
-      <!-- Objetivos semanales aquí -->
-    </div>
-    <div id="unicos" class="tab-content">
-      <!-- Objetivos únicos aquí -->
-    </div>
-    <div id="editar" class="tab-content">
-      <!-- Formulario de edición de objetivos aquí -->
-    </div>
-
-    <!-- Formulario para agregar un nuevo objetivo -->
-    <div class="formulario">
-      <input type="text" id="nuevo-objetivo" placeholder="Nuevo objetivo">
-      <select id="tipo-objetivo">
-        <option value="diario">Diario</option>
-        <option value="semanal">Semanal</option>
-        <option value="unico">Único</option>
-      </select>
-      <select id="dia-seleccionado">
-        <option value="lunes">Lunes</option>
-        <option value="martes">Martes</option>
-        <option value="miercoles">Miércoles</option>
-        <option value="jueves">Jueves</option>
-        <option value="viernes">Viernes</option>
-        <option value="sabado">Sábado</option>
-        <option value="domingo">Domingo</option>
-      </select>
-      <button id="agregar-objetivo">Agregar Objetivo</button>
-      <button id="reset-btn">Resetear Progreso</button>
-    </div>
-  </div>
-
-  <template id="template-objetivo">
-    <div class="objetivo">
-      <h2></h2>
-      <div class="tareas"></div>
-      <input type="text" class="nueva-tarea" placeholder="Nueva tarea">
-      <button class="agregar-tarea">Agregar Tarea</button>
-      <div class="progress-bar">
-        <div class="progress"></div>
-      </div>
-      <button class="editar-objetivo">Editar</button>
-      <button class="eliminar-objetivo">Eliminar</button>
-    </div>
-  </template>
-
-  <template id="template-tarea">
-    <div class="tarea">
-      <input type="checkbox">
-      <label></label>
-      <button class="editar-tarea">Editar</button>
-      <button class="eliminar-tarea">Eliminar</button>
-    </div>
-  </template>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
+
