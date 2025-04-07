@@ -5,97 +5,96 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background: #1e1e1e;
-    color: #fff;
+    font-family: 'Arial', sans-serif;
+    background: #121212;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: #00ff00;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+nav a:hover {
+    background-color: #333;
 }
 
 .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background: #2c3e50;
-    border-radius: 10px;
+    width: 80%;
 }
 
-.tabs {
+main {
+    width: 100%;
     display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
+    flex-direction: column;
+    gap: 40px;
 }
 
-.tab-btn {
-    padding: 10px 15px;
-    background: #3498db;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    color: white;
-}
-
-.tab-btn.active {
-    background: #1abc9c;
-}
-
-.tab-content {
+section {
     display: none;
 }
 
-.tab-content.hidden {
-    display: none;
-}
-
-.tab-content:not(.hidden) {
+.tab:target {
     display: block;
 }
 
-h2 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-#diarios-objetivos,
-#semanales-objetivos,
-#resumen-objetivos,
-#editar-objetivos {
-    margin-top: 10px;
-}
-
-.objetivo {
-    background: #34495e;
-    padding: 15px;
-    margin-bottom: 15px;
-    border-radius: 10px;
-}
-
 button {
-    background-color: #2ecc71;
-    border: none;
+    background-color: #00ff00;
+    color: #121212;
     padding: 10px;
-    color: white;
+    border: none;
     cursor: pointer;
     border-radius: 5px;
     margin-top: 10px;
 }
 
 button:hover {
-    background-color: #27ae60;
+    background-color: #00cc00;
+}
+
+.formulario {
+    display: none;
+    background-color: #1a1a1a;
+    padding: 20px;
+    border-radius: 10px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    z-index: 100;
 }
 
 input, select {
+    width: 100%;
     padding: 10px;
     margin-top: 10px;
-    width: 100%;
-    margin-bottom: 15px;
-    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
     border: none;
+    border-radius: 5px;
 }
 
-input[type="text"] {
-    background-color: #ecf0f1;
+button[type="submit"] {
+    background-color: #008000;
+    margin-top: 20px;
 }
 
-input[type="text"]:focus {
-    background-color: #bdc3c7;
-}
