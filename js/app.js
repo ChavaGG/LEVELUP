@@ -1,4 +1,4 @@
-// Variable global para almacenar datos (para simplificar).
+// Variables globales para almacenar los objetivos
 let dailyObjectives = JSON.parse(localStorage.getItem('dailyObjectives')) || [];
 let weeklyObjectives = JSON.parse(localStorage.getItem('weeklyObjectives')) || [];
 
@@ -35,13 +35,13 @@ function markTaskAsComplete(taskId, objectiveId) {
   task.completed = true;
   
   // Guardar cambios en el localStorage
-  localStorage.setItem('dailyObjectives', JSON.stringify(dailyObjectives));
+  saveDailyObjectives();
 
   // Actualizar la vista
   showTab('daily');
 }
 
-// Renderizar objetivos diarios
+// Renderizar los objetivos diarios
 function renderDailyObjectives() {
   let html = '<h2>Objetivos del Día</h2>';
   html += '<ul>';
@@ -73,5 +73,19 @@ function getProgress(objective) {
   return (completedTasks / totalTasks) * 100;
 }
 
-// Renderizar otros tab (semanales, historial, etc.)
-// Funciones como renderWeeklyObjectives(), renderHistory(), etc., siguen una estructura similar a renderDailyObjectives().
+// Verificar el nuevo día
+function checkNewDay() {
+  const lastCheckedDate = localStorage.getItem('lastCheckedDate');
+  const currentDate = new Date().toISOString().split('T')[0]; // Solo fecha sin la hora
+
+  if (lastCheckedDate !== currentDate) {
+    // Si es un nuevo día, actualiza el objetivo
+    localStorage.setItem('lastCheckedDate', currentDate);
+    // Lógica para actualizar el objetivo del día aquí
+    dailyObjectives = []; // Este es solo un ejemplo
+    saveDailyObjectives();
+  }
+}
+
+// Llamar a la función al cargar la página
+checkNewDay();
