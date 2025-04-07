@@ -1,46 +1,40 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Productivity App</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="manifest" href="/manifest.json">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productivity Game</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="app">
     <header>
-      <h1>Productivity App</h1>
-      <nav>
-        <ul>
-          <li><a href="#" onclick="showTab('daily')">Objetivos Diarios</a></li>
-          <li><a href="#" onclick="showTab('weekly')">Objetivos Semanales</a></li>
-          <li><a href="#" onclick="showTab('history')">Objetivos Pasados</a></li>
-          <li><a href="#" onclick="showTab('summary')">Resumen</a></li>
-          <li><a href="#" onclick="showTab('manage')">Gestionar Objetivos</a></li>
-        </ul>
-      </nav>
+        <h1>Productivity Game</h1>
     </header>
 
-    <main id="content">
-      <!-- Aquí se cargarán las vistas dinámicas -->
-    </main>
-  </div>
+    <div class="task-container">
+        <h2>Tareas</h2>
+        <button onclick="showAddTaskModal()">Añadir tarea</button>
+        <div id="tasks-list"></div>
+    </div>
 
-  <script src="js/app.js"></script>
-  <script>
-    // Registrar el Service Worker
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js')
-          .then((registration) => {
-            console.log('Service Worker registrado con éxito:', registration);
-          })
-          .catch((error) => {
-            console.log('Error al registrar el Service Worker:', error);
-          });
-      });
-    }
-  </script>
+    <div id="task-modal" class="modal">
+        <div class="modal-content">
+            <h3>Crear Tarea</h3>
+            <input type="text" id="task-title" placeholder="Título de la tarea" required>
+            <button onclick="addTask()">Añadir Tarea</button>
+            <button onclick="closeModal()">Cerrar</button>
+        </div>
+    </div>
+
+    <div id="subtask-modal" class="modal">
+        <div class="modal-content">
+            <h3>Añadir Subtarea</h3>
+            <input type="text" id="subtask-title" placeholder="Título de la subtarea" required>
+            <button onclick="addSubtask()">Añadir Subtarea</button>
+            <button onclick="closeSubtaskModal()">Cerrar</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
