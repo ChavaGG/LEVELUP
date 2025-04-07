@@ -23,7 +23,7 @@ header {
 }
 
 h1 {
-    font-size: 2.5rem;
+    font-size: 3rem;
     color: #00ff00; /* Verde brillante como los videojuegos retro */
     text-shadow: 0 0 10px #00ff00;
     font-weight: bold;
@@ -34,6 +34,7 @@ nav ul {
     list-style-type: none;
     display: flex;
     gap: 20px;
+    justify-content: center;
 }
 
 nav a {
@@ -52,6 +53,7 @@ nav a:hover {
 
 .container {
     width: 80%;
+    max-width: 1000px;
 }
 
 main {
