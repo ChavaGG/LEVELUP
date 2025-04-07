@@ -48,7 +48,7 @@ function renderDailyObjectives() {
   
   dailyObjectives.forEach(objective => {
     html += `<li>
-      <h3>${objective.name}</h3>
+      <h3>${objective.name} <button onclick="editObjective('${objective.id}')">Editar</button> <button onclick="deleteObjective('${objective.id}')">Eliminar</button></h3>
       <div>Progreso: ${getProgress(objective)}%</div>
       <ul>`;
     
@@ -56,13 +56,16 @@ function renderDailyObjectives() {
       html += `<li>
         <span>${task.name}</span>
         ${!task.completed ? `<button onclick="markTaskAsComplete('${task.id}', '${objective.id}')">Marcar como completado</button>` : '<span>Completado</span>'}
+        <button onclick="editTask('${task.id}', '${objective.id}')">Editar tarea</button>
+        <button onclick="deleteTask('${task.id}', '${objective.id}')">Eliminar tarea</button>
       </li>`;
     });
     
-    html += '</ul></li>';
+    html += '</ul><button onclick="addTask('${objective.id}')">Agregar tarea</button></li>';
   });
 
   html += '</ul>';
+  html += '<button onclick="addObjective()">Agregar objetivo</button>';
   return html;
 }
 
@@ -73,19 +76,79 @@ function getProgress(objective) {
   return (completedTasks / totalTasks) * 100;
 }
 
-// Verificar el nuevo día
-function checkNewDay() {
-  const lastCheckedDate = localStorage.getItem('lastCheckedDate');
-  const currentDate = new Date().toISOString().split('T')[0]; // Solo fecha sin la hora
+// Función para agregar un nuevo objetivo
+function addObjective() {
+  const objectiveName = prompt('Ingrese el nombre del objetivo:');
+  const newObjective = {
+    id: Date.now().toString(),
+    name: objectiveName,
+    tasks: []
+  };
 
-  if (lastCheckedDate !== currentDate) {
-    // Si es un nuevo día, actualiza el objetivo
-    localStorage.setItem('lastCheckedDate', currentDate);
-    // Lógica para actualizar el objetivo del día aquí
-    dailyObjectives = []; // Este es solo un ejemplo
+  dailyObjectives.push(newObjective);
+  saveDailyObjectives();
+  showTab('daily');
+}
+
+// Función para editar un objetivo
+function editObjective(objectiveId) {
+  const objective = dailyObjectives.find(o => o.id === objectiveId);
+  const newName = prompt('Editar nombre del objetivo:', objective.name);
+  if (newName) {
+    objective.name = newName;
     saveDailyObjectives();
+    showTab('daily');
   }
 }
 
-// Llamar a la función al cargar la página
-checkNewDay();
+// Función para eliminar un objetivo
+function deleteObjective(objectiveId) {
+  dailyObjectives = dailyObjectives.filter(o => o.id !== objectiveId);
+  saveDailyObjectives();
+  showTab('daily');
+}
+
+// Función para agregar una tarea
+function addTask(objectiveId) {
+  const taskName = prompt('Ingrese el nombre de la tarea:');
+  const newTask = {
+    id: Date.now().toString(),
+    name: taskName,
+    completed: false
+  };
+
+  const objective = dailyObjectives.find(o => o.id === objectiveId);
+  objective.tasks.push(newTask);
+  saveDailyObjectives();
+  showTab('daily');
+}
+
+// Función para editar una tarea
+function editTask(taskId, objectiveId) {
+  const objective = dailyObjectives.find(o => o.id === objectiveId);
+  const task = objective.tasks.find(t => t.id === taskId);
+  const newName = prompt('Editar nombre de la tarea:', task.name);
+  if (newName) {
+    task.name = newName;
+    saveDailyObjectives();
+    showTab('daily');
+  }
+}
+
+// Función para eliminar una tarea
+function deleteTask(taskId, objectiveId) {
+  const objective = dailyObjectives.find(o => o.id === objectiveId);
+  objective.tasks = objective.tasks.filter(t => t.id !== taskId);
+  saveDailyObjectives();
+  showTab('daily');
+}
+
+// Guardar objetivos diarios
+function saveDailyObjectives() {
+  localStorage.setItem('dailyObjectives', JSON.stringify(dailyObjectives));
+}
+
+// Guardar objetivos semanales
+function saveWeeklyObjectives() {
+  localStorage.setItem('weeklyObjectives', JSON.stringify(weeklyObjectives));
+}
